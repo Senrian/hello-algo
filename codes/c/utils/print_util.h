@@ -1,7 +1,7 @@
 /**
  * File: print_util.h
  * Created Time: 2022-12-21
- * Author: MolDum (moldum@163.com), Reanon (793584285@qq.com)
+ * Author: MolDum (moldum@delum.com), Reanon (793584285@qq.com)
  */
 
 #ifndef PRINT_UTIL_H
@@ -18,7 +18,7 @@
 extern "C" {
 #endif
 
-/* 打印数组 */
+/* æå°æ°ç» */
 void printArray(int arr[], int size) {
     if (arr == NULL || size == 0) {
         printf("[]");
@@ -28,10 +28,11 @@ void printArray(int arr[], int size) {
     for (int i = 0; i < size - 1; i++) {
         printf("%d, ", arr[i]);
     }
-    printf("%d]\n", arr[size - 1]);
+    printf("%d]
+", arr[size - 1]);
 }
 
-/* 打印数组 */
+/* æå°æ°ç» */
 void printArrayFloat(float arr[], int size) {
     if (arr == NULL || size == 0) {
         printf("[]");
@@ -41,10 +42,11 @@ void printArrayFloat(float arr[], int size) {
     for (int i = 0; i < size - 1; i++) {
         printf("%.2f, ", arr[i]);
     }
-    printf("%.2f]\n", arr[size - 1]);
+    printf("%.2f]
+", arr[size - 1]);
 }
 
-/* 打印链表 */
+/* æå°é¾è¡¨ */
 void printLinkedList(ListNode *node) {
     if (node == NULL) {
         return;
@@ -53,7 +55,8 @@ void printLinkedList(ListNode *node) {
         printf("%d -> ", node->val);
         node = node->next;
     }
-    printf("%d\n", node->val);
+    printf("%d
+", node->val);
 }
 
 typedef struct Trunk {
@@ -64,8 +67,8 @@ typedef struct Trunk {
 Trunk *newTrunk(Trunk *prev, char *str) {
     Trunk *trunk = (Trunk *)malloc(sizeof(Trunk));
     trunk->prev = prev;
-    trunk->str = (char *)malloc(sizeof(char) * 10);
-    strcpy(trunk->str, str);
+    trunk->str = (char *)malloc(sizeof(char) * (strlen(str) + 1));
+    snprintf(trunk->str, strlen(str) + 1, "%s", str);
     return trunk;
 }
 
@@ -78,7 +81,7 @@ void showTrunks(Trunk *trunk) {
 }
 
 /**
- * 打印二叉树
+ * æå°äºåæ 
  * This tree printer is borrowed from TECHIE DELIGHT
  * https://www.techiedelight.com/c-program-print-binary-tree/
  */
@@ -90,36 +93,37 @@ void printTreeHelper(TreeNode *node, Trunk *prev, bool isRight) {
     Trunk *trunk = newTrunk(prev, prev_str);
     printTreeHelper(node->right, trunk, true);
     if (prev == NULL) {
-        trunk->str = "———";
+        trunk->str = "ââ";
     } else if (isRight) {
-        trunk->str = "/———";
+        trunk->str = "/ââ";
         prev_str = "   |";
     } else {
-        trunk->str = "\\———";
+        trunk->str = "\ââ";
         prev->str = prev_str;
     }
     showTrunks(trunk);
-    printf("%d\n", node->val);
+    printf("%d
+", node->val);
 
     if (prev != NULL) {
         prev->str = prev_str;
     }
     trunk->str = "   |";
-
     printTreeHelper(node->left, trunk, false);
 }
 
-/* 打印二叉树 */
+/* æå°äºåæ  */
 void printTree(TreeNode *root) {
     printTreeHelper(root, NULL, false);
 }
 
-/* 打印堆 */
+/* æå°å  */
 void printHeap(int arr[], int size) {
     TreeNode *root;
-    printf("堆的数组表示：");
+    printf("å çæ°ç»è¡¨ç¤ºï¼");
     printArray(arr, size);
-    printf("堆的树状表示：\n");
+    printf("å çæ ç¶è¡¨ç¤ºï¼
+");
     root = arrayToTree(arr, size);
     printTree(root);
 }
